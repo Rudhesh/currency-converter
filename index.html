@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>currency exchange</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            document.querySelector('form').onsubmit = function () {
+
+
+                fetch('https://openexchangerates.org/api/latest.json?app_id=0b21096f22b44ac9aec0760b4907663e')
+
+                    .then(response => response.json())
+                    .then(data => {
+                        const currency = document.querySelector('#currency').value.toUpperCase();
+                        const rate = data.rates[currency];
+                        if (rate !== undefined) {
+                            document.querySelector('#result').innerHTML = `1 USD is equal to ${rate.toFixed(3)} ${currency}.`;
+                        } else {
+
+                            document.querySelector('#result').innerHTML = 'Invalid currency.';
+                        }
+                        
+                    });
+
+
+                return false;
+            }
+
+        });
+    </script>
+
+    <style>
+
+        body {
+            font: 1.8em sans-serif;
+            text-align: center;
+            margin-top: 40vh;
+            background-color: rgb(216, 181, 255);
+            
+            
+        }
+
+        form {
+
+  
+        }
+
+        input[type=text], [type=submit] {<remote> <branch>
+            
+            font: 1em sans-serif;
+            padding: 10px;
+            background-color: rgb(241, 241, 241);
+            
+            border-radius: 10px;
+            border-style: none;
+            border: rgb(0, 0, 0) 1px solid;
+            outline: none;
+
+
+        } 
+
+           
+    </style>
+</head>
+
+<body>
+    <h2>Currency Converter</h2>
+    <form action="">
+        <input id="currency" placeholder="Currency" type="text">
+        <input type="submit" value="Convert">
+    </form>
+    <div id="result">
+
+    </div>
+</body>
+
+</html>
